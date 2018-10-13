@@ -10,6 +10,20 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var frontLabel: UILabel!
+    @IBOutlet weak var backLabel: UILabel!
+    
+    @IBAction func didTapOnFlashcard(_ sender: Any) {
+        if(frontLabel.isHidden)
+        {
+            frontLabel.isHidden = false
+        }
+        else if(!frontLabel.isHidden)
+        {
+        frontLabel.isHidden = true
+        }
+        print(frontLabel.isHidden)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
