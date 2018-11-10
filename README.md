@@ -1,5 +1,23 @@
 ## Flashcards
 
+## Lab 3
+
+### App Description
+Users can view and add flashcards with persistence
+
+### App Walk-though
+
+<img src="https://i.imgur.com/Zd7ubMr.gif" width=200><br>
+
+## Required
+- [x] User can browse through multiple flashcards
+- [x] User can re-open the app and see previously created flashcards
+- [x] Push code to GitHub
+## Optional
+- [ ] User can delete a flashcard
+- [ ] User can edit existing flashcard
+- [ ] User can store multiple choice questions
+
 ## Lab 2
 
 ### App Description
