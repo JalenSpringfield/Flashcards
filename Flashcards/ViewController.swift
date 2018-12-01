@@ -14,6 +14,7 @@ struct Flashcard {
 }
 class ViewController: UIViewController {
 
+    @IBOutlet weak var card: UIView!
     @IBOutlet weak var frontLabel: UILabel!
     @IBOutlet weak var backLabel: UILabel!
     @IBOutlet weak var prevButton: UIButton!
@@ -31,28 +32,68 @@ class ViewController: UIViewController {
         creationController.flashcardsController = self
         
     }
+    
     @IBAction func didTapOnPrev(_ sender: Any) {
         currentIndex = currentIndex - 1
-        updateLabels()
         updateNextPrevButtons()
+        animateCardOutLeft()
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
         currentIndex = currentIndex + 1
-        updateLabels()
         updateNextPrevButtons()
+        animateCardOut()
+    }
+    
+    func animateCardIn(){
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+        UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateCardInLeft(){
+        card.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+        UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateCardOut(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: -300, y: 0)
+        }, completion: { finished in
+            self.updateLabels()
+            self.animateCardIn()
+        })
+    }
+    
+    func animateCardOutLeft(){
+        UIView.animate(withDuration: 0.3, animations: {
+            self.card.transform = CGAffineTransform.identity.translatedBy(x: 300, y: 0)
+        }, completion: { finished in
+            self.updateLabels()
+            self.animateCardInLeft()
+        })
+    }
+    
+    func flipFlashcard(){
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            if(self.frontLabel.isHidden)
+            {
+                self.frontLabel.isHidden = false
+            }
+            else if(!self.frontLabel.isHidden)
+            {
+                self.frontLabel.isHidden = true
+            }
+            print(self.frontLabel.isHidden)
+        })
+        
     }
     
     @IBAction func didTapOnFlashcard(_ sender: Any) {
-        if(frontLabel.isHidden)
-        {
-            frontLabel.isHidden = false
-        }
-        else if(!frontLabel.isHidden)
-        {
-        frontLabel.isHidden = true
-        }
-        print(frontLabel.isHidden)
+        flipFlashcard()
     }
     func updateLabels() {
         let currentFlashcard = flashcards[currentIndex]
